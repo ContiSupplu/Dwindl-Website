@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dwindl — You're on the list.</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css" />
+  
+  <style>
+    body { 
+      display: flex; 
+      flex-direction: column; 
+      min-height: 100vh; 
+      justify-content: center; 
+      align-items: center; 
+      background-color: var(--ink); 
+      color: var(--paper); 
+      text-align: center; 
+      padding: 24px; 
+    }
+    .ty-icon { 
+      color: var(--green); 
+      margin-bottom: 32px; 
+    }
+    h1 { 
+      font-size: 48px; 
+      letter-spacing: -0.04em; 
+      margin-bottom: 16px; 
+    }
+    p { 
+      font-size: 18px; 
+      color: var(--soft); 
+      max-width: 400px; 
+      line-height: 1.5; 
+      margin-bottom: 48px; 
+    }
+    .home-btn { 
+      background-color: var(--paper); 
+      color: var(--ink); 
+      padding: 16px 32px; 
+      border-radius: 12px; 
+      font-weight: 700; 
+      font-size: 16px;
+      text-decoration: none; 
+      transition: opacity 0.2s; 
+    }
+    .home-btn:hover { 
+      opacity: 0.9; 
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Success Icon -->
+  <svg class="ty-icon fade-in-up" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+  </svg>
+
+  <h1 class="fade-in-up" style="animation-delay: 0.1s">You're on the list.</h1>
+  <p class="fade-in-up" style="animation-delay: 0.2s">Your spot is secured. We'll notify you the exact moment Dwindl is ready to rip shrinkflation open on your phone.</p>
+  
+  <a href="index.html" class="home-btn fade-in-up" style="animation-delay: 0.3s">Back to Dwindl</a>
+
+</body>
+</html>
