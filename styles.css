@@ -1085,3 +1085,4 @@ body.shock-state .alt-sub { color: var(--soft); }
 .email-btn:active, .home-btn:active { transform: scale(0.96) !important; }
 .email-btn:hover { transform: scale(1.02); }
 
+.email-btn, .home-btn { transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1), background 0.2s, opacity 0.2s !important; } .email-btn:active, .home-btn:active { transform: scale(0.96) !important; } .email-btn:hover { transform: scale(1.02); }
