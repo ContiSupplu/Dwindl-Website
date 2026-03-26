@@ -112,7 +112,7 @@ async function buildSite() {
   const db = await fetchDatabase();
 
   // ----------------- STATIC ASSETS -----------------
-  ['app.js', 'robots.txt', 'privacy.html', 'terms.html', 'app.html', 'thank-you.html', '404.html'].forEach(file => {
+  ['app.js', 'robots.txt', 'privacy.html', 'terms.html', 'app/index.html', 'thank-you.html', '404.html'].forEach(file => {
     const srcPath = path.join(DIR_SRC, file);
     if (fs.existsSync(srcPath)) {
       if (file.endsWith('.html')) {
@@ -399,3 +399,6 @@ buildSite().catch(err => {
   console.error('Fatal Build Error:', err);
   process.exit(1);
 });
+
+if (!fs.existsSync(path.join(DIR_DIST, 'app'))) fs.mkdirSync(path.join(DIR_DIST, 'app'), { recursive: true });
+
