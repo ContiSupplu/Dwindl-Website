@@ -8,6 +8,7 @@ const FILE_DB = path.join(__dirname, 'data', 'db.json');
 if (!fs.existsSync(DIR_DIST)) fs.mkdirSync(DIR_DIST, { recursive: true });
 if (!fs.existsSync(path.join(DIR_DIST, 'brands'))) fs.mkdirSync(path.join(DIR_DIST, 'brands'), { recursive: true });
 if (!fs.existsSync(path.join(DIR_DIST, 'blog'))) fs.mkdirSync(path.join(DIR_DIST, 'blog'), { recursive: true });
+if (!fs.existsSync(path.join(DIR_DIST, 'app'))) fs.mkdirSync(path.join(DIR_DIST, 'app'), { recursive: true });
 
 const todayDate = new Date().toISOString().split('T')[0];
 const css = fs.readFileSync(path.join(DIR_SRC, 'styles.css'), 'utf-8');
