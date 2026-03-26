@@ -41,7 +41,7 @@ export async function updateSession(request: NextRequest) {
   
   if (user) {
     // Check if user is admin
-    const { data: profile } = await supabase
+    const { data: profile, error: dbError } = await supabase
       .from('profiles')
       .select('is_admin')
       .eq('id', user.id)
@@ -51,10 +51,14 @@ export async function updateSession(request: NextRequest) {
 
     if (!isAdmin) {
       if (!isAuthPage) {
-        // Logged in but not admin, maybe redirect to a specific error or logout
+        // Logged in but not admin, redirect with verbose error
         const url = request.nextUrl.clone()
         url.pathname = '/login'
-        url.searchParams.set('error', 'access_denied')
+        if (dbError) {
+          url.searchParams.set('error', `db_${dbError.code}_${dbError.message.replace(/ /g, '+')}`)
+        } else {
+          url.searchParams.set('error', `not_admin_val_${profile?.is_admin}`)
+        }
         return NextResponse.redirect(url)
       }
     } else {
