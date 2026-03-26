@@ -112,7 +112,7 @@ async function buildSite() {
   const db = await fetchDatabase();
 
   // ----------------- STATIC ASSETS -----------------
-  ['app.js', 'robots.txt', 'privacy.html', 'terms.html', 'app/index.html', 'thank-you.html', '404.html'].forEach(file => {
+  ['app.js', 'robots.txt', 'privacy.html', 'terms.html', 'app.html', 'thank-you.html', '404.html'].forEach(file => {
     const srcPath = path.join(DIR_SRC, file);
     if (fs.existsSync(srcPath)) {
       if (file.endsWith('.html')) {
