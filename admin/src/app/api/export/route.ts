@@ -18,19 +18,39 @@ export async function GET(request: Request) {
     }
   )
 
-  // 1. Fetch raw data
-  const { data: products, error } = await supabase
-    .from('products')
-    .select(`
-      *,
-      size_history (*),
-      prices (*)
-    `)
-    .eq('hidden', false)
+  // 1. Fetch raw data in chunks to bypass Supabase 1,000 row limit
+  const allProducts: any[] = []
+  let hasMore = true
+  let page = 0
+  const pageSize = 1000
 
-  if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
+  while (hasMore) {
+    const { data: pageData, error } = await supabase
+      .from('products')
+      .select(`
+        *,
+        size_history (*),
+        prices (*)
+      `)
+      .eq('hidden', false)
+      .range(page * pageSize, (page + 1) * pageSize - 1)
+
+    if (error) {
+      return NextResponse.json({ error: error.message }, { status: 500 })
+    }
+
+    if (pageData && pageData.length > 0) {
+      allProducts.push(...pageData)
+      page++
+      if (pageData.length < pageSize) {
+        hasMore = false
+      }
+    } else {
+      hasMore = false
+    }
   }
+
+  const products = allProducts
 
   // 2. Transform Data
   const formattedProducts = []
