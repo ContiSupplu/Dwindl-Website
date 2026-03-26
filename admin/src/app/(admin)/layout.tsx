@@ -3,6 +3,8 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { createClient } from "@/utils/supabase/server"
 import { redirect } from "next/navigation"
 
+export const runtime = 'edge'
+
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient()
 
