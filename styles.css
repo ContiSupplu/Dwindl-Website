@@ -425,16 +425,17 @@ a {
 
 .email-input {
   flex-grow: 1;
-  padding: 16px;
+  padding: 16px 20px;
   background-color: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 12px;
+  border: 2px solid var(--ink);
+  border-radius: 50px;
   font-size: 15px;
   color: var(--ink);
 }
 
 .email-input:focus {
-  border-color: var(--muted);
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(17, 17, 17, 0.1);
 }
 
 .email-btn {
@@ -442,10 +443,10 @@ a {
   color: var(--white);
   font-weight: 700;
   font-size: 15px;
-  padding: 16px 24px;
-  border-radius: 12px;
+  padding: 16px 32px;
+  border-radius: 50px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
   white-space: nowrap;
 }
 
@@ -1086,3 +1087,5 @@ body.shock-state .alt-sub { color: var(--soft); }
 .email-btn:hover { transform: scale(1.02); }
 
 .email-btn, .home-btn { transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1), background 0.2s, opacity 0.2s !important; } .email-btn:active, .home-btn:active { transform: scale(0.96) !important; } .email-btn:hover { transform: scale(1.02); }
+
+.app-promo-link { position: absolute; top: 32px; right: 32px; z-index: 10; color: var(--ink); font-weight: 700; font-size: 14px; text-decoration: none; transition: opacity 0.2s; } .app-promo-link:hover { opacity: 0.7; } body.shock-state .app-promo-link { color: var(--paper); }
