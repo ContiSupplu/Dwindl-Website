@@ -1,0 +1,151 @@
+{
+  "site": {
+    "name": "Dwindl",
+    "url": "https://dwindl.ai",
+    "lastUpdated": "2026-03-25"
+  },
+  "stats": {
+    "totalTracked": 420,
+    "totalShrunk": 185,
+    "averageReduction": 11.2,
+    "worstCategory": "Cereal",
+    "worstBrand": "General Mills",
+    "changesThisQuarter": 42,
+    "communityReports": 1284
+  },
+  "categories": [
+    {
+      "id": "cereal",
+      "name": "Cereal",
+      "count": 45,
+      "shrunkCount": 28,
+      "avgPercentage": 14.5,
+      "worstProduct": "Honey Nut Cheerios",
+      "worstPercentage": 15.4
+    },
+    {
+      "id": "household",
+      "name": "Household",
+      "count": 82,
+      "shrunkCount": 41,
+      "avgPercentage": 12.0,
+      "worstProduct": "Charmin Ultra Soft",
+      "worstPercentage": 16.2
+    }
+  ],
+  "brands": [
+    {
+      "id": "general-mills",
+      "name": "General Mills",
+      "count": 32,
+      "shrunkCount": 20,
+      "avgPercentage": 13.8,
+      "worstProduct": "Honey Nut Cheerios",
+      "worstPercentage": 15.4
+    },
+    {
+      "id": "procter-gamble",
+      "name": "Procter & Gamble",
+      "count": 55,
+      "shrunkCount": 25,
+      "avgPercentage": 11.5,
+      "worstProduct": "Charmin Ultra Soft",
+      "worstPercentage": 16.2
+    }
+  ],
+  "products": [
+    {
+      "id": "honey-nut-cheerios",
+      "name": "Honey Nut Cheerios",
+      "brandId": "general-mills",
+      "categoryId": "cereal",
+      "originalSize": "15.4 oz",
+      "currentSize": "13.0 oz",
+      "percentage": 15.4,
+      "score": 41,
+      "hasShrunk": true,
+      "earliestYear": 2019,
+      "latestYear": 2024,
+      "numChanges": 2,
+      "lastVerified": "2026-03-25",
+      "history": [
+        {"year": 2019, "size": "15.4 oz"},
+        {"year": 2022, "size": "14.0 oz"},
+        {"year": 2024, "size": "13.0 oz"}
+      ],
+      "price": {
+        "avgPrice": "$4.29",
+        "unitPrice": "$0.33/oz",
+        "fairness": "fair"
+      },
+      "alternatives": [
+        {"name": "Trader Joe's Honey Nut O's", "score": 95, "price": "$2.99", "desc": "Maintained 15 oz size since 2018."}
+      ],
+      "related": ["cinnamon-toast-crunch", "frosted-flakes"]
+    },
+    {
+      "id": "charmin-ultra-soft",
+      "name": "Charmin Ultra Soft",
+      "brandId": "procter-gamble",
+      "categoryId": "household",
+      "originalSize": "286 sheets",
+      "currentSize": "244 sheets",
+      "percentage": 14.6,
+      "score": 38,
+      "hasShrunk": true,
+      "earliestYear": 2020,
+      "latestYear": 2023,
+      "numChanges": 2,
+      "lastVerified": "2026-03-25",
+      "history": [
+        {"year": 2020, "size": "286 sheets"},
+        {"year": 2021, "size": "264 sheets"},
+        {"year": 2023, "size": "244 sheets"}
+      ],
+      "price": {
+        "avgPrice": "$14.99",
+        "unitPrice": "$0.06/sheet",
+        "fairness": "below average"
+      },
+      "alternatives": [
+        {"name": "Kirkland Signature Bath Tissue", "score": 85, "price": "$22.99", "desc": "380 sheets per roll, better value per sheet."}
+      ],
+      "related": ["bounty-paper-towels", "cottonelle-ultra-comfort"]
+    },
+    {
+      "id": "dawn-dish-soap",
+      "name": "Dawn Dish Soap",
+      "brandId": "procter-gamble",
+      "categoryId": "household",
+      "originalSize": "19.4 oz",
+      "currentSize": "19.4 oz",
+      "percentage": 0,
+      "score": 100,
+      "hasShrunk": false,
+      "earliestYear": 2018,
+      "latestYear": 2026,
+      "numChanges": 0,
+      "lastVerified": "2026-03-25",
+      "history": [
+        {"year": 2018, "size": "19.4 oz"}
+      ],
+      "price": {
+        "avgPrice": "$3.49",
+        "unitPrice": "$0.17/oz",
+        "fairness": "fair"
+      },
+      "alternatives": [],
+      "related": ["palmolive-ultra", "seventh-generation-dish-liquid"]
+    }
+  ],
+  "blog": [
+    {
+      "id": "q1-2026-worst-shrinkflation",
+      "title": "Q1 2026: The 10 Worst Shrinkflation Catches",
+      "desc": "A ranked list of the most significant size reductions detected this quarter.",
+      "date": "2026-03-15",
+      "lastModified": "2026-03-16",
+      "content": "<p>Content of the blog post goes here...</p>"
+    }
+  ]
+}
