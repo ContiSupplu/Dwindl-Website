@@ -206,7 +206,12 @@ async function buildSite() {
 
   const layoutTemplate = fs.readFileSync(path.join(DIR_SRC, 'layout.html'), 'utf-8');
 
-  db.products.forEach(p => {
+  // ----------------- PRODUCTS -----------------
+  // VERCEL / CLOUDFLARE LIMIT: Max 20,000 files per deployment.
+  // We statically generate dedicated SEO pages for the Top 18,000 worst offenders.
+  const seoReadyProducts = db.products.sort((a, b) => b.percentage - a.percentage).slice(0, 18000);
+  
+  seoReadyProducts.forEach(p => {
     const brand = db.brands.find(b => b.id === p.brandId) || {name: p.brandId};
     const category = db.categories.find(c => c.id === p.categoryId) || {name: p.categoryId};
     
