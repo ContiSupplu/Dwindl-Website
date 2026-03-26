@@ -209,7 +209,7 @@ async function buildSite() {
   // ----------------- PRODUCTS -----------------
   // VERCEL / CLOUDFLARE LIMIT: Max 20,000 files per deployment.
   // We statically generate dedicated SEO pages for the Top 18,000 worst offenders.
-  const seoReadyProducts = db.products.sort((a, b) => b.percentage - a.percentage).slice(0, 18000);
+  const seoReadyProducts = db.products.sort((a, b) => b.percentage - a.percentage).slice(0, 10000);
   
   seoReadyProducts.forEach(p => {
     const brand = db.brands.find(b => b.id === p.brandId) || {name: p.brandId};
@@ -301,7 +301,8 @@ async function buildSite() {
   });
 
   // ----------------- CATEGORIES -----------------
-  db.categories.forEach(c => {
+  const topCategories = db.categories.sort((a, b) => b.count - a.count).slice(0, 2000);
+  topCategories.forEach(c => {
     const catProductsAll = db.products.filter(p => p.categoryId === c.id).sort((a, b) => b.percentage - a.percentage);
     const catProducts = catProductsAll.slice(0, 2000);
     const title = `${c.name} Shrinkflation Tracker — Which ${c.name} Products Shrunk | Dwindl`;
@@ -339,7 +340,8 @@ async function buildSite() {
   });
 
   // ----------------- BRANDS -----------------
-  db.brands.forEach(b => {
+  const topBrands = db.brands.sort((a, b) => b.count - a.count).slice(0, 5000);
+  topBrands.forEach(b => {
     const brandProductsAll = db.products.filter(p => p.brandId === b.id).sort((a, b) => b.percentage - a.percentage);
     const brandProducts = brandProductsAll.slice(0, 2000);
     const title = `${b.name} Shrinkflation Tracker — ${b.count} Products Tracked | Dwindl`;
