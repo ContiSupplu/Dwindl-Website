@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "build": "node build.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "wrangler deploy",
+    "preview": "wrangler dev"
   },
   "repository": {
     "type": "git",
@@ -18,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/ContiSupplu/Dwindl-Website/issues"
   },
-  "homepage": "https://github.com/ContiSupplu/Dwindl-Website#readme"
+  "homepage": "https://github.com/ContiSupplu/Dwindl-Website#readme",
+  "devDependencies": {
+    "wrangler": "^4.77.0"
+  }
 }
