@@ -220,9 +220,7 @@ CREATE POLICY "Public can read swaps" ON swaps FOR SELECT TO anon USING (true);
 CREATE POLICY "Public authenticated can read swaps" ON swaps FOR SELECT TO authenticated USING (true);
 
 -- profiles Admin
-CREATE POLICY "Admins have full access to profiles"
-  ON profiles FOR ALL TO authenticated
-  USING (EXISTS (SELECT 1 FROM profiles WHERE profiles.id = auth.uid() AND profiles.is_admin = true));
+-- (Removed recursive Admin policy to prevent 42P17 infinite recursion)
 CREATE POLICY "Users can read own profile" ON profiles FOR SELECT TO authenticated USING (auth.uid() = id);
 CREATE POLICY "Users can update own profile" ON profiles FOR UPDATE TO authenticated USING (auth.uid() = id);
 
