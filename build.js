@@ -297,7 +297,8 @@ async function buildSite() {
 
   // ----------------- CATEGORIES -----------------
   db.categories.forEach(c => {
-    const catProducts = db.products.filter(p => p.categoryId === c.id).sort((a, b) => b.percentage - a.percentage);
+    const catProductsAll = db.products.filter(p => p.categoryId === c.id).sort((a, b) => b.percentage - a.percentage);
+    const catProducts = catProductsAll.slice(0, 2000);
     const title = `${c.name} Shrinkflation Tracker — Which ${c.name} Products Shrunk | Dwindl`;
     const desc = `Dwindl tracks ${c.count} ${c.name} products for shrinkflation. Of those, ${c.shrunkCount} have been reduced.`;
     
@@ -326,6 +327,7 @@ async function buildSite() {
             </tr>`).join('')}
           </tbody>
         </table>
+        ${catProductsAll.length > 2000 ? `<p style="margin-top: 24px; color: var(--soft); text-align: center; font-style: italic;">Displaying top 2,000 worst offenders. Open the Dwindl app to search all ${c.count} products.</p>` : ''}
       </main>
     `;
     writeHtml(c.id, generatePage(layoutTemplate, { slug: c.id, title, description: desc, replacements: { '{{PRODUCT_CONTENT}}': content }}));
@@ -333,7 +335,8 @@ async function buildSite() {
 
   // ----------------- BRANDS -----------------
   db.brands.forEach(b => {
-    const brandProducts = db.products.filter(p => p.brandId === b.id).sort((a, b) => b.percentage - a.percentage);
+    const brandProductsAll = db.products.filter(p => p.brandId === b.id).sort((a, b) => b.percentage - a.percentage);
+    const brandProducts = brandProductsAll.slice(0, 2000);
     const title = `${b.name} Shrinkflation Tracker — ${b.count} Products Tracked | Dwindl`;
     const desc = `Dwindl tracks ${b.count} ${b.name} products. Average reduction: ${b.avgPercentage}%.`;
     
@@ -362,6 +365,7 @@ async function buildSite() {
             </tr>`).join('')}
           </tbody>
         </table>
+        ${brandProductsAll.length > 2000 ? `<p style="margin-top: 24px; color: var(--soft); text-align: center; font-style: italic;">Displaying top 2,000 worst offenders. Open the Dwindl app to search all ${b.count} products.</p>` : ''}
       </main>
     `;
     writeHtml(`brands/${b.id}`, generatePage(layoutTemplate, { slug: `brands/${b.id}`, title, description: desc, replacements: { '{{PRODUCT_CONTENT}}': content }}));
@@ -450,9 +454,23 @@ async function buildSite() {
     writeHtml('blog', generatePage(layoutTemplate, { slug: 'blog', title: "Dwindl Blog — Shrinkflation Data & Analysis", description: "Read the latest deep-dives into grocery shrinkflation data from the Dwindl database.", replacements: { '{{PRODUCT_CONTENT}}': blogIndexContent }}));
   }
 
-  // Build Sitemaps
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\\n${sitemap.map(e => `  <url>\\n    <loc>${e.url}</loc>\\n    <lastmod>${e.lastMod}</lastmod>\\n  </url>`).join('\\n')}\\n</urlset>`;
-  fs.writeFileSync(path.join(DIR_DIST, 'sitemap.xml'), xml);
+  // Build Sitemaps safely below the Google 50,000 max link count per file
+  if (sitemap.length > 40000) {
+    const chunks = [];
+    for (let i = 0; i < sitemap.length; i += 40000) {
+      chunks.push(sitemap.slice(i, i + 40000));
+    }
+    const indexXml = `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${chunks.map((_, i) => `  <sitemap>\n    <loc>https://dwindl.ai/sitemap-${i}.xml</loc>\n  </sitemap>`).join('\n')}\n</sitemapindex>`;
+    fs.writeFileSync(path.join(DIR_DIST, 'sitemap.xml'), indexXml);
+    
+    chunks.forEach((chunk, i) => {
+      const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${chunk.map(e => `  <url>\n    <loc>${e.url}</loc>\n    <lastmod>${e.lastMod}</lastmod>\n  </url>`).join('\n')}\n</urlset>`;
+      fs.writeFileSync(path.join(DIR_DIST, `sitemap-${i}.xml`), xml);
+    });
+  } else {
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemap.map(e => `  <url>\n    <loc>${e.url}</loc>\n    <lastmod>${e.lastMod}</lastmod>\n  </url>`).join('\n')}\n</urlset>`;
+    fs.writeFileSync(path.join(DIR_DIST, 'sitemap.xml'), xml);
+  }
   console.log('✅ Build seamlessly compiled all pages + Sitemaps to dist directory!');
 }
 
