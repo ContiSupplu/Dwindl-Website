@@ -14,6 +14,11 @@ import Link from "next/link"
 
 const items = [
   {
+    title: "Review Queue",
+    url: "/queue",
+    icon: Inbox,
+  },
+  {
     title: "Products",
     url: "/products",
     icon: Package,

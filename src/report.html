@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report a Shrink | Help the Dwindl Database</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header style="border-bottom: 2px solid var(--line); padding: 16px 24px; position: sticky; top: 0; background: var(--bg); z-index: 10;">
+    <div style="max-width: 800px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+      <a href="/" style="font-size: 24px; font-weight: 800; letter-spacing: -0.05em; color: var(--ink); text-decoration: none;">Dwindl.</a>
+      <nav>
+        <a href="/data" style="margin-left: 16px; font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: none;">Data</a>
+        <a href="/blog" style="margin-left: 16px; font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: none;">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="max-width: 600px; padding: 40px 24px; min-height: calc(100vh - 150px);">
+    <h1 style="font-size: 32px; font-weight: 800; margin-bottom: 16px; letter-spacing: -0.02em;">Take a stand against shrinkflation.</h1>
+    <p style="font-size: 16px; color: var(--soft); line-height: 1.6; margin-bottom: 40px;">
+      We rely on consumers like you to build the world's most accurate database of product downsizes. Snap a photo of an old package next to a new package, or upload a photo of a misleading shelf tag that proves a size reduction. <br><br>
+      <strong>Your Data is 100% Anonymous and Secure:</strong> <br>Photos are stripped of EXIF data and strictly used as verification evidence by our database administrators. Your location and identity are never tracked or saved.
+    </p>
+
+    <!-- Success Modal -->
+    <div id="success-message" style="display: none; background: var(--ink); color: var(--white); padding: 32px; border-radius: 12px; margin-bottom: 40px;">
+      <h2 style="font-weight: 800; font-size: 24px; margin-bottom: 8px;">Evidence Received. 🫡</h2>
+      <p style="line-height:1.5;">Thank you for holding corporations accountable. Your report has been submitted securely to the Dwindl review queue and is pending verification. Once an admin verifies the barcode, the product score will be permanently slashed on the main website.</p>
+      <br><a href="/report" style="color: var(--white); text-decoration: underline; font-weight:700;">Submit another report</a>
+    </div>
+
+    <!-- Active Form -->
+    <form id="report-form" style="display: flex; flex-direction: column; gap: 24px;">
+      
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label for="product_name" style="font-size: 14px; font-weight: 700;">Product Name *</label>
+        <input type="text" id="product_name" name="product_name" required placeholder="e.g. Honey Nut Cheerios Family Size" style="padding: 12px; border: 2px solid var(--line); border-radius: 8px; font-size: 16px; background: var(--bg); color: var(--ink);">
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label for="barcode" style="font-size: 14px; font-weight: 700;">Barcode / UPC *</label>
+        <input type="text" id="barcode" name="barcode" required placeholder="e.g. 000123456789" style="padding: 12px; border: 2px solid var(--line); border-radius: 8px; font-size: 16px; background: var(--bg); color: var(--ink);">
+      </div>
+
+      <div style="display: flex; gap: 16px;">
+        <div style="display: flex; flex-direction: column; gap: 8px; flex: 1;">
+          <label for="old_size" style="font-size: 14px; font-weight: 700;">Old Size *</label>
+          <input type="text" id="old_size" name="old_size" required placeholder="e.g. 15.4 oz" style="padding: 12px; border: 2px solid var(--line); border-radius: 8px; font-size: 16px; background: var(--bg); color: var(--ink);">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; flex: 1;">
+          <label for="new_size" style="font-size: 14px; font-weight: 700;">New Size *</label>
+          <input type="text" id="new_size" name="new_size" required placeholder="e.g. 13.0 oz" style="padding: 12px; border: 2px solid var(--line); border-radius: 8px; font-size: 16px; background: var(--bg); color: var(--ink);">
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <label for="store_name" style="font-size: 14px; font-weight: 700;">Where did you spot this? (Optional)</label>
+        <input type="text" id="store_name" name="store_name" placeholder="e.g. Target, Aisle 4" style="padding: 12px; border: 2px solid var(--line); border-radius: 8px; font-size: 16px; background: var(--bg); color: var(--ink);">
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
+        <label for="image" style="font-size: 14px; font-weight: 700;">Photographic Evidence *</label>
+        <p style="font-size: 13px; color: var(--soft); margin-top: -4px;">This will pop open your camera to snap a photo instantly, or you can attach one from your phone gallery.</p>
+        <input type="file" id="image" name="image" accept="image/*" required style="padding: 16px; border: 2px dashed var(--soft); border-radius: 8px; font-size: 14px; background: var(--white); cursor: pointer;">
+      </div>
+
+      <button type="submit" id="submit-btn" style="margin-top: 16px; background: var(--ink); color: var(--white); border: none; padding: 16px 24px; font-size: 16px; font-weight: 800; border-radius: 8px; cursor: pointer; transition: opacity 0.2s;">
+        Submit Evidence Securely
+      </button>
+
+      <p id="error-message" style="color: var(--red); font-size: 14px; font-weight: 600; display: none; margin-top: -8px;"></p>
+    </form>
+  </main>
+
+  <script>
+    document.getElementById('report-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const btn = document.getElementById('submit-btn');
+      const err = document.getElementById('error-message');
+      const form = e.target;
+      const formData = new FormData(form);
+
+      // Loading state UI lock
+      btn.disabled = true;
+      btn.style.opacity = '0.5';
+      btn.innerText = 'Processing Payload...';
+      err.style.display = 'none';
+
+      try {
+        const response = await fetch('https://admin.dwindl.ai/api/report', {
+          method: 'POST',
+          body: formData
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          form.style.display = 'none';
+          document.getElementById('success-message').style.display = 'block';
+          window.scrollTo(0,0);
+        } else {
+          err.innerText = result.error || 'Server rejected payload. Please try again.';
+          err.style.display = 'block';
+          btn.disabled = false;
+          btn.style.opacity = '1';
+          btn.innerText = 'Submit Evidence Securely';
+        }
+      } catch (error) {
+        err.innerText = 'Network connection failed. Are you offline?';
+        err.style.display = 'block';
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        btn.innerText = 'Submit Evidence Securely';
+      }
+    });
+  </script>
+</body>
+</html>
