@@ -18,39 +18,26 @@ export async function GET(request: Request) {
     }
   )
 
-  // 1. Fetch raw data in chunks to bypass Supabase 1,000 row limit
-  const allProducts: any[] = []
-  let hasMore = true
-  let page = 0
+  const { searchParams } = new URL(request.url)
+  const page = parseInt(searchParams.get('page') || '0', 10)
   const pageSize = 1000
 
-  while (hasMore) {
-    const { data: pageData, error } = await supabase
-      .from('products')
-      .select(`
-        *,
-        size_history (*),
-        prices (*)
-      `)
-      .eq('hidden', false)
-      .range(page * pageSize, (page + 1) * pageSize - 1)
+  // 1. Fetch exactly 1 chunk of 1000 rows to bypass 50-request limit on Cloudflare Edge Worker
+  const { data: pageData, error } = await supabase
+    .from('products')
+    .select(`
+      *,
+      size_history (*),
+      prices (*)
+    `)
+    .eq('hidden', false)
+    .range(page * pageSize, (page + 1) * pageSize - 1)
 
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 })
-    }
-
-    if (pageData && pageData.length > 0) {
-      allProducts.push(...pageData)
-      page++
-      if (pageData.length < pageSize) {
-        hasMore = false
-      }
-    } else {
-      hasMore = false
-    }
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 })
   }
 
-  const products = allProducts
+  const products = pageData || []
 
   // 2. Transform Data
   const formattedProducts = []
@@ -131,58 +118,10 @@ export async function GET(request: Request) {
       alternatives: [], // Handled by separate swaps table if needed later
       related: []
     })
-
-    // Aggregate Brands
-    if (!brandsMap.has(brandId)) {
-      brandsMap.set(brandId, { id: brandId, name: p.brand || 'Unknown', count: 0, shrunkCount: 0, totalPerc: 0 })
-    }
-    const b = brandsMap.get(brandId)
-    b.count++
-    if (hasShrunk) { b.shrunkCount++; b.totalPerc += percentage }
-
-    // Aggregate Categories
-    if (!categoriesMap.has(categoryId)) {
-      categoriesMap.set(categoryId, { id: categoryId, name: p.category || 'Uncategorized', count: 0, shrunkCount: 0, totalPerc: 0 })
-    }
-    const c = categoriesMap.get(categoryId)
-    c.count++
-    if (hasShrunk) { c.shrunkCount++; c.totalPerc += percentage }
   }
 
-  // Format aggregated maps
-  const brands = Array.from(brandsMap.values()).map(b => ({
-    ...b,
-    avgPercentage: b.shrunkCount > 0 ? parseFloat((b.totalPerc / b.shrunkCount).toFixed(1)) : 0,
-    worstProduct: 'Unknown',
-    worstPercentage: 0
-  }))
-
-  const categories = Array.from(categoriesMap.values()).map(c => ({
-    ...c,
-    avgPercentage: c.shrunkCount > 0 ? parseFloat((c.totalPerc / c.shrunkCount).toFixed(1)) : 0,
-    worstProduct: 'Unknown',
-    worstPercentage: 0
-  }))
-
   const finalPayload = {
-    site: {
-      name: "Dwindl",
-      url: "https://dwindl.ai",
-      lastUpdated: new Date().toISOString().split('T')[0]
-    },
-    stats: {
-      totalTracked: formattedProducts.length,
-      totalShrunk: totalShrunk,
-      averageReduction: totalShrunk > 0 ? parseFloat((totalReduction / totalShrunk).toFixed(1)) : 0,
-      worstCategory: "N/A",
-      worstBrand: "N/A",
-      changesThisQuarter: 0,
-      communityReports: 0
-    },
-    categories: categories,
-    brands: brands,
     products: formattedProducts,
-    blog: [] // Hardcoded for now
   }
 
   return NextResponse.json(finalPayload)
