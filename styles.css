@@ -389,6 +389,8 @@ a {
   z-index: 2;
   margin-bottom: -10px; /* pull down onto the line */
 }
+.change-val.color-green { color: var(--green); }
+.change-val.color-red { color: var(--red); }
 
 .change-line {
   width: 100%;
@@ -549,20 +551,12 @@ a {
 
 @media (max-width: 768px) {
   .shame-scroll {
-    padding: 24px;
+    padding: 24px 0;
     width: 100%;
     overflow-x: hidden;
   }
   .shame-scroll::before, .shame-scroll::after {
     display: none;
-  }
-  .shame-track {
-    flex-direction: column;
-    width: 100%;
-    animation: none;
-  }
-  .shame-card {
-    width: 100%;
   }
 }
 
@@ -815,8 +809,14 @@ body.search-focused .ambient-data {
   font-weight: 800;
   padding: 4px 8px;
   border-radius: 6px;
+}
+.sc-change.color-red {
   color: var(--red);
   background: rgba(229,56,75,0.06);
+}
+.sc-change.color-green {
+  color: var(--green);
+  background: rgba(22, 160, 96, 0.05);
 }
 
 body.shock-state .shame-scroll { background-color: var(--ink); }
