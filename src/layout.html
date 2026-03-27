@@ -13,8 +13,8 @@
 </head>
 <body>
   <!-- Header Minimal -->
-  <header class="container" style="padding: 24px;">
-    <a href="/" class="logo-wordmark" style="transform: scale(0.8); transform-origin: left center;">
+  <header class="container" style="padding: 24px; display: flex; justify-content: space-between; align-items: center;">
+    <a href="/" class="logo-wordmark" style="transform: scale(0.8); transform-origin: left center; text-decoration: none;">
       <svg class="logo-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <mask id="biteMaskTop"><rect width="100" height="100" fill="white"/><circle cx="48" cy="60" r="12" fill="black"/><circle cx="25" cy="38" r="12" fill="black"/><circle cx="41" cy="30" r="10" fill="black"/></mask>
@@ -24,6 +24,10 @@
       </svg>
       <span class="logo-text">windl<span class="logo-period">.</span></span>
     </a>
+    <nav style="display: flex; gap: 16px; align-items: center;">
+      <a href="/data" style="font-size: 14px; font-weight: 600; color: var(--soft); text-decoration: none;">Data</a>
+      <a href="/report" style="font-size: 14px; font-weight: 700; color: var(--red); background: var(--pink); padding: 8px 16px; border-radius: 20px; text-decoration: none;">+ Report</a>
+    </nav>
   </header>
 
   {{PRODUCT_CONTENT}}
