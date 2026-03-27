@@ -7,8 +7,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header style="border-bottom: 2px solid var(--line); padding: 16px 24px; position: sticky; top: 0; background: var(--bg); z-index: 10;">
-    <div style="max-width: 800px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+  <header class="container" style="border-bottom: 2px solid var(--line); padding: 16px 24px; position: sticky; top: 0; background: var(--paper); z-index: 10; display: flex; justify-content: space-between; align-items: center;">
       <a href="/" class="logo-wordmark" style="transform: scale(0.8); transform-origin: left center; text-decoration: none;">
         <svg class="logo-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -21,7 +20,6 @@
       </a>
       <nav>
       </nav>
-    </div>
   </header>
 
   <main class="container" style="max-width: 600px; padding: 40px 24px; min-height: calc(100vh - 150px);">
@@ -51,12 +49,12 @@
         <input type="text" id="barcode" class="email-input" name="barcode" required placeholder="e.g. 000123456789">
       </div>
 
-      <div style="display: flex; gap: 16px;">
-        <div style="display: flex; flex-direction: column; gap: 8px; flex: 1;">
+      <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+        <div style="display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 240px;">
           <label for="old_size" style="font-size: 14px; font-weight: 700;">Old Size *</label>
           <input type="text" id="old_size" class="email-input" name="old_size" required placeholder="e.g. 15.4 oz">
         </div>
-        <div style="display: flex; flex-direction: column; gap: 8px; flex: 1;">
+        <div style="display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 240px;">
           <label for="new_size" style="font-size: 14px; font-weight: 700;">New Size *</label>
           <input type="text" id="new_size" class="email-input" name="new_size" required placeholder="e.g. 13.0 oz">
         </div>
