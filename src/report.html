@@ -11,8 +11,6 @@
     <div style="max-width: 800px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
       <a href="/" style="font-size: 24px; font-weight: 800; letter-spacing: -0.05em; color: var(--ink); text-decoration: none;">Dwindl.</a>
       <nav>
-        <a href="/data" style="margin-left: 16px; font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: none;">Data</a>
-        <a href="/blog" style="margin-left: 16px; font-size: 14px; font-weight: 600; color: var(--ink); text-decoration: none;">Blog</a>
       </nav>
     </div>
   </header>
@@ -25,10 +23,10 @@
     </p>
 
     <!-- Success Modal -->
-    <div id="success-message" style="display: none; background: var(--ink); color: var(--white); padding: 32px; border-radius: 12px; margin-bottom: 40px;">
+    <div id="success-message" style="display: none; background: var(--white); color: var(--ink); border: 2px solid var(--ink); padding: 32px; border-radius: 24px; margin-bottom: 40px; box-shadow: 4px 4px 0 var(--ink);">
       <h2 style="font-weight: 800; font-size: 24px; margin-bottom: 8px;">Evidence Received. 🫡</h2>
-      <p style="line-height:1.5;">Thank you for holding corporations accountable. Your report has been submitted securely to the Dwindl review queue and is pending verification. Once an admin verifies the barcode, the product score will be permanently slashed on the main website.</p>
-      <br><a href="/report" style="color: var(--white); text-decoration: underline; font-weight:700;">Submit another report</a>
+      <p style="line-height:1.5; color: var(--soft);">Thank you for holding corporations accountable. Your report has been submitted securely to the Dwindl review queue and is pending verification. Once an admin verifies the barcode, the product score will be permanently slashed on the main website.</p>
+      <br><a href="/report" style="color: var(--ink); text-decoration: underline; font-weight:700;">Submit another report →</a>
     </div>
 
     <!-- Active Form -->
@@ -36,37 +34,37 @@
       
       <div style="display: flex; flex-direction: column; gap: 8px;">
         <label for="product_name" style="font-size: 14px; font-weight: 700;">Product Name *</label>
-        <input type="text" id="product_name" name="product_name" required placeholder="e.g. Honey Nut Cheerios Family Size" style="padding: 12px; border: 2px solid var(--line); border-radius: 8px; font-size: 16px; background: var(--bg); color: var(--ink);">
+        <input type="text" id="product_name" class="email-input" name="product_name" required placeholder="e.g. Honey Nut Cheerios Family Size">
       </div>
 
       <div style="display: flex; flex-direction: column; gap: 8px;">
         <label for="barcode" style="font-size: 14px; font-weight: 700;">Barcode / UPC *</label>
-        <input type="text" id="barcode" name="barcode" required placeholder="e.g. 000123456789" style="padding: 12px; border: 2px solid var(--line); border-radius: 8px; font-size: 16px; background: var(--bg); color: var(--ink);">
+        <input type="text" id="barcode" class="email-input" name="barcode" required placeholder="e.g. 000123456789">
       </div>
 
       <div style="display: flex; gap: 16px;">
         <div style="display: flex; flex-direction: column; gap: 8px; flex: 1;">
           <label for="old_size" style="font-size: 14px; font-weight: 700;">Old Size *</label>
-          <input type="text" id="old_size" name="old_size" required placeholder="e.g. 15.4 oz" style="padding: 12px; border: 2px solid var(--line); border-radius: 8px; font-size: 16px; background: var(--bg); color: var(--ink);">
+          <input type="text" id="old_size" class="email-input" name="old_size" required placeholder="e.g. 15.4 oz">
         </div>
         <div style="display: flex; flex-direction: column; gap: 8px; flex: 1;">
           <label for="new_size" style="font-size: 14px; font-weight: 700;">New Size *</label>
-          <input type="text" id="new_size" name="new_size" required placeholder="e.g. 13.0 oz" style="padding: 12px; border: 2px solid var(--line); border-radius: 8px; font-size: 16px; background: var(--bg); color: var(--ink);">
+          <input type="text" id="new_size" class="email-input" name="new_size" required placeholder="e.g. 13.0 oz">
         </div>
       </div>
 
       <div style="display: flex; flex-direction: column; gap: 8px;">
         <label for="store_name" style="font-size: 14px; font-weight: 700;">Where did you spot this? (Optional)</label>
-        <input type="text" id="store_name" name="store_name" placeholder="e.g. Target, Aisle 4" style="padding: 12px; border: 2px solid var(--line); border-radius: 8px; font-size: 16px; background: var(--bg); color: var(--ink);">
+        <input type="text" id="store_name" class="email-input" name="store_name" placeholder="e.g. Target, Aisle 4">
       </div>
 
       <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 8px;">
         <label for="image" style="font-size: 14px; font-weight: 700;">Photographic Evidence *</label>
         <p style="font-size: 13px; color: var(--soft); margin-top: -4px;">This will pop open your camera to snap a photo instantly, or you can attach one from your phone gallery.</p>
-        <input type="file" id="image" name="image" accept="image/*" required style="padding: 16px; border: 2px dashed var(--soft); border-radius: 8px; font-size: 14px; background: var(--white); cursor: pointer;">
+        <input type="file" id="image" class="email-input" name="image" accept="image/*" required style="border: 2px dashed var(--ink); padding: 16px; cursor: pointer;">
       </div>
 
-      <button type="submit" id="submit-btn" style="margin-top: 16px; background: var(--ink); color: var(--white); border: none; padding: 16px 24px; font-size: 16px; font-weight: 800; border-radius: 8px; cursor: pointer; transition: opacity 0.2s;">
+      <button type="submit" id="submit-btn" class="email-btn" style="margin-top: 16px;">
         Submit Evidence Securely
       </button>
 

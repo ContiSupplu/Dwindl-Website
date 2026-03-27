@@ -1099,9 +1099,12 @@ body.shock-state .alt-sub { color: var(--soft); }
 
 .email-btn, .home-btn { transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1), background 0.2s, opacity 0.2s !important; } .email-btn:active, .home-btn:active { transform: scale(0.96) !important; } .email-btn:hover { transform: scale(1.02); }
 
-.app-promo-link { position: absolute; top: 32px; right: 32px; z-index: 10; color: var(--ink); font-weight: 700; font-size: 14px; text-decoration: none; transition: opacity 0.2s; } .app-promo-link:hover { opacity: 0.7; } body.shock-state .app-promo-link { color: var(--paper); }
+.app-promo-link { position: absolute; top: 32px; right: 32px; z-index: 60; color: var(--ink); font-weight: 700; font-size: 14px; text-decoration: none; transition: opacity 0.2s; } .app-promo-link:hover { opacity: 0.7; } body.shock-state .app-promo-link { color: var(--paper); }
 
 @media (max-width: 480px) { .app-promo-link { top: 32px; right: 24px; font-size: 12px; } }
+
+.report-btn { font-size: 14px; font-weight: 700; color: var(--ink); background: var(--white); border: 2px solid var(--ink); padding: 8px 16px; border-radius: 50px; text-decoration: none; transition: transform 0.15s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.15s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.2s; box-shadow: 2px 2px 0 var(--ink); } .report-btn:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); } .report-btn:active { transform: translate(2px, 2px); box-shadow: 0px 0px 0 var(--ink); }
+
 </style>
   
   <style>
