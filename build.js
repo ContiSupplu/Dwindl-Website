@@ -175,7 +175,7 @@ async function buildSite() {
   
   const db = await fetchDatabase();
 
-  ['app.js', 'robots.txt', 'privacy.html', 'terms.html', 'app/index.html', 'thank-you.html', '404.html', 'report.html'].forEach(file => {
+  ['app.js', 'robots.txt', 'privacy.html', 'terms.html', 'app/index.html', 'thank-you.html', '404.html', 'report/index.html'].forEach(file => {
     const srcPath = path.join(DIR_SRC, file);
     if (fs.existsSync(srcPath)) {
       if (file.endsWith('.html')) {
@@ -487,3 +487,6 @@ buildSite().catch(err => {
 });
 
 if (!fs.existsSync(path.join(DIR_DIST, 'app'))) fs.mkdirSync(path.join(DIR_DIST, 'app'), { recursive: true });
+
+if (!fs.existsSync(path.join(DIR_DIST, 'report'))) fs.mkdirSync(path.join(DIR_DIST, 'report'), { recursive: true });
+
