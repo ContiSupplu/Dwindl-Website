@@ -14,9 +14,24 @@ export async function POST(request: Request) {
     const newSize = formData.get('new_size')?.toString() || ''
     const storeName = formData.get('store_name')?.toString() || ''
     const image = formData.get('image') as File | null
+    const turnstileToken = formData.get('cf-turnstile-response')?.toString() || ''
 
     if (!barcode || !productName || !oldSize || !newSize || !image) {
       return NextResponse.json({ error: 'Missing required report fields or evidence.' }, { status: 400 })
+    }
+
+    // 1b. Verify Turnstile token server-side
+    const turnstileRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        secret: process.env.TURNSTILE_SECRET_KEY,
+        response: turnstileToken,
+      }),
+    })
+    const turnstileData = await turnstileRes.json() as { success: boolean }
+    if (!turnstileData.success) {
+      return NextResponse.json({ error: 'Security check failed. Please refresh and try again.' }, { status: 403 })
     }
 
     // 2. Init Admin Supabase Client
